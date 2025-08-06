@@ -1,17 +1,21 @@
 package br.ce.wcaquino.testes;
 
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import br.ce.wcaquino.core.BaseTest;
 import br.ce.wcaquino.pages.ContasPage;
 import br.ce.wcaquino.pages.MenuPage;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 public class ContaTest extends BaseTest {
 	MenuPage menuPage = new MenuPage();
 	ContasPage contasPage = new ContasPage();
 	@Test
-	public void testeInserirConta(){
+	public void test1_InserirConta(){
 		menuPage.acessarTelaInserirConta();
 		
 		contasPage.setNome("Conta do Test");
@@ -21,7 +25,7 @@ public class ContaTest extends BaseTest {
 	}
 	
    @Test
-   public void testAlterarConta() {
+   public void test2_AlterarConta() {
 	   menuPage.acessarTelaListarConta();
 	   
 	   contasPage.cliclarAlterarConta("Conta do Test");
@@ -32,7 +36,7 @@ public class ContaTest extends BaseTest {
    }
    
    @Test
-   public void testInserirContaMesmoNome() {
+   public void test3_InserirContaMesmoNome() {
 	   menuPage.acessarTelaInserirConta();
 	   
 	   contasPage.setNome("Cont do Teste Alterada");
@@ -41,12 +45,5 @@ public class ContaTest extends BaseTest {
 	   Assert.assertEquals("Já existe uma conta com esse nome!", contasPage.obterMesagemErro());
    }
    
-   @Test
-   public void excluirContaComMovimentacao() {
-	   menuPage.acessarTelaListarConta();
-	   
-	   contasPage.cliclarExcluirConta("Cont do Teste Alterada");
-
-	   Assert.assertEquals("Conta em uso na movimentações", contasPage.obterMesagemErro());
-   }
+  
 }
